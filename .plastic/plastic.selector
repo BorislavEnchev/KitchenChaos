@@ -1,0 +1,4 @@
+repository "KitchenChaos@borkokiborko@cloud"
+  path "/"
+    br "/main"
+    co "/main"
