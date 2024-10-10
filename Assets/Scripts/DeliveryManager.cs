@@ -7,6 +7,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public EventHandler OnRecipeSpawned;
     public EventHandler OnRecipeCompleted;
+    public EventHandler OnDeliverySuccess;
+    public EventHandler OnDeliveryFailed;
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -77,12 +79,14 @@ public class DeliveryManager : MonoBehaviour
                     waitingRecipeSOList.Remove(waitingRecipeSO);
 
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnDeliverySuccess?.Invoke(this, EventArgs.Empty);
 
                     return;
                 }
             }
         }
         // Player did not deliver a correct recipe
+        OnDeliveryFailed?.Invoke(this, EventArgs.Empty);
     }
 
     public List<RecipeSO> GetWaitingRecipeSOList()
